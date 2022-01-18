@@ -507,7 +507,8 @@ def _fix_tokens(contents_text: str, min_version: Version) -> str:
         elif token.src == '(':
             _fix_extraneous_parens(tokens, i)
         elif token.src == 'format' and i > 0 and tokens[i - 1].src == '.':
-            _fix_format_literal(tokens, i - 2)
+            # _fix_format_literal(tokens, i - 2)
+            pass
         elif token.src == 'encode' and i > 0 and tokens[i - 1].src == '.':
             _fix_encode_to_binary(tokens, i)
         elif (
@@ -574,10 +575,11 @@ class FindPy36Plus(ast.NodeVisitor):
         ):
             return None
 
-        try:
-            return parse_format(node.func.value.s)
-        except ValueError:
-            return None
+        # try:
+        #     return parse_format(node.func.value.s)
+        # except ValueError:
+        #     return None
+        return None
 
     def visit_Call(self, node: ast.Call) -> None:
         parsed = self._parse(node)
